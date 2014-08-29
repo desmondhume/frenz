@@ -5,10 +5,13 @@ RSpec.describe UsersController, :type => :controller do
 
     describe "post #create" do
 
-      it "returns welcome message" do
-        post :create, format: :json, fb_uid: '123123', token: 'asdoasdo'
+      it "returns welcome message and new user infos" do
+        post :create, format: :json, 
+          fb_uid: '123123', 
+          token: 'asdoasdo'
+
         expect(json).to have_key('message')
-        expect(json['message']).to eq('Welcome!')
+        expect(json).to have_key('user')
       end
 
       it "should respond with success" do
