@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
   root 'application#index'
-  post 'api/v1/users', to: 'users#create'
+  
+  scope 'api/v1' do
+    resources :sessions, only: [:create]
+    get 'sessions/me', to: 'sessions#me'
+
+    get 'users/me', to: 'users#me'
+  end
+
 end

@@ -1,88 +1,22 @@
 Frenz.Models.User = Backbone.Model.extend({
-  initialize: function(attributes, options) {
-    options || (options = {});
-    this.options = _.defaults(options, this.defaultOptions);
 
-    _.bindAll(this, 'onLoginStatusChange');
-
-    FB.Event.subscribe('auth.authResponseChange', this.onLoginStatusChange);
-  },
-
-  options: null,
-
-  defaultOptions: {
-    scope: ['public_profile'],
-    autoFetch: true,
-    protocol: location.protocol
-  },
-
+  urlRoot: Frenz.Config.apiUrl + 'users',
   _loginStatus: null,
+
+  me: function() {
+    $.ajaxSetup({
+      headers: { 'access_token' : Frenz.session.get('accessToken') }
+    });
+    this.url = this.urlRoot + '/me.json';
+    this.fetch();
+  },
+
+  parse: function(payload) {
+    return payload.user;
+  },
 
   isConnected: function() {
     return this._loginStatus === 'connected';
   },
 
-  signup: function(response, user) {
-    var _fb_response = FB.getAuthResponse();
-    $.post('/api/v1/users.json', {
-      token: _fb_response['accessToken'],
-      fb_uid: _fb_response['userID']
-    }, function(data) {
-      user.profile = data.profile;
-      user.trigger("signup");
-    });
-  },
-
-  login: function(callback){
-    if (typeof callback === 'undefined') {
-      callback = function() {};
-    }
-    var _user = this;
-    FB.login(function(response) {
-      callback(response, _user);
-    }, { scope: this.options.scope.join(',') });
-  },
-
-  logout: function(){
-    FB.logout();
-  },
-
-  updateLoginStatus: function(){
-    FB.getLoginStatus(this.onLoginStatusChange);
-  },
-
-  onLoginStatusChange: function(response) {
-    if(this._loginStatus === response.status) return false;
-
-    var event;
-
-    if(response.status === 'not_authorized') {
-      event = 'facebook:unauthorized';
-    } else if (response.status === 'connected') {
-      event = 'facebook:connected';
-      if(this.options.autoFetch === true) this.fetch();
-    } else {
-      event = 'facebook:disconnected';
-    }
-
-    this._loginStatus = response.status;
-    this.trigger(event, this, response);
-  },
-
-  sync: function(method, model, options) {
-    if(method !== 'read') throw new Error('FacebookUser is a readonly model, cannot perform ' + method);
-
-    var callback = function(response) {
-      if(response.error) {
-        options.error(response);
-      } else {
-        options.success(response);
-      }
-      return true;
-    };
-
-    var request = FB.api('/me', callback);
-    model.trigger('request', model, request, options);
-    return request;
-  }
 });
