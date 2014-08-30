@@ -6,8 +6,11 @@ window.Frenz = {
   initialize: function() {
     var _this = this;
     $('#login_with_facebook').on('click', function() {
-      var user = new _this.Models.User();
-      user.login();
+      user = new _this.Models.User();
+      userProfileView = new Frenz.Views.UserProfile({
+        model: user
+      });
+      user.login(user.signup);
     })
   }
 };

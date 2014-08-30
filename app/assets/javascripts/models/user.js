@@ -22,13 +22,14 @@ Frenz.Models.User = Backbone.Model.extend({
     return this._loginStatus === 'connected';
   },
 
-  signup: function(response) {
+  signup: function(response, user) {
     var _fb_response = FB.getAuthResponse();
     $.post('/api/v1/users.json', {
       token: _fb_response['accessToken'],
       fb_uid: _fb_response['userID']
     }, function(data) {
-      localStorage.setItem("frenz_fb_access_token", data.long_token);
+      user.profile = data.profile;
+      user.trigger("signup");
     });
   },
 
@@ -36,7 +37,10 @@ Frenz.Models.User = Backbone.Model.extend({
     if (typeof callback === 'undefined') {
       callback = function() {};
     }
-    FB.login(this.signup, { scope: this.options.scope.join(',') });
+    var _user = this;
+    FB.login(function(response) {
+      callback(response, _user);
+    }, { scope: this.options.scope.join(',') });
   },
 
   logout: function(){
