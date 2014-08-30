@@ -4,7 +4,11 @@ window.Frenz = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Backbone is working!')
+    var _this = this;
+    $('#login_with_facebook').on('click', function() {
+      var user = new _this.Models.User();
+      user.login();
+    })
   }
 };
 
