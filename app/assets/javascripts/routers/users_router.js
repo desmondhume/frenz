@@ -5,8 +5,12 @@ Frenz.Routers.Users = Backbone.Router.extend({
   },
 
   profile: function() {
-    var userProfileView = new Frenz.Views.UserProfile({model: current_user});
+    var userProfileView =
+      Frenz.mainView.subviews.userProfileView = 
+      new Frenz.Views.UserProfile({model: current_user});
+
     userProfileView.render();
+    Frenz.mainView.$el.append(userProfileView.el);
   },
 
 });

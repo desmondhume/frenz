@@ -21,7 +21,12 @@ window.Frenz = {
         });
       })
     }
+
+    this.mainView = new Frenz.Views.Main();
+
+    var mainRouter = new Frenz.Routers.Main();
     var usersRouter = new Frenz.Routers.Users();
+
     Backbone.history.start({pushState: true});
 
     $('body').on('click', 'a[data-route]', function(e) {
