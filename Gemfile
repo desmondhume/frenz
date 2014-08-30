@@ -28,6 +28,8 @@ gem 'koala'
 gem 'backbone-on-rails', '~> 1.1.0.0'
 gem 'lodash-rails', '~> 2.2.1'
 
+gem 'handlebars_assets'
+
 group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
