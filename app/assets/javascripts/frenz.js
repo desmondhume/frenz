@@ -21,8 +21,12 @@ window.Frenz = {
         });
       })
     }
+    var usersRouter = new Frenz.Routers.Users();
+    Backbone.history.start({pushState: true});
 
-    var userProfileView = new this.Views.UserProfile({model: current_user});
-
+    $('body').on('click', 'a[data-route]', function(e) {
+      e.preventDefault();
+      Backbone.history.navigate($(this).attr('href'), {trigger: true});
+    })
   }
 };
