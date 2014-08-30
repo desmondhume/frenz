@@ -9,7 +9,7 @@ RSpec.describe UsersController, :type => :controller do
         post :create, format: :json, 
           fb_uid: '123123', 
           token: 'asdoasdo'
-
+          puts json
         expect(json).to have_key('message')
         expect(json).to have_key('user')
       end
