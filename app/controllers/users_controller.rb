@@ -3,9 +3,18 @@ class UsersController < ApplicationController
 
   def create
     profile = @koala_api.get_object('me')
-    respond_to do |format|
-      format.json { render json: {message: 'Welcome!', long_token: @long_lived_token, profile: profile}.to_json, status: 201 }
+    @user = User.new(fb_uid: profile['id'], access_token: @long_lived_token, first_name: profile['first_name'], last_name: profile['last_name'] )
+
+    if @user.save
+      respond_to do |format|
+        format.json { render json: {message: 'Welcome!', user: @user}.to_json, status: 201 }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: {message: 'Welcome!', user: @user.errors}.to_json, status: 401 }
+      end
     end
+    
   end
 
   private
