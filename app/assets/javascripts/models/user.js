@@ -11,10 +11,6 @@ Frenz.Models.User = Backbone.Model.extend({
     this.fetch();
   },
 
-  parse: function(payload) {
-    return payload.user;
-  },
-
   isConnected: function() {
     return this._loginStatus === 'connected';
   },
