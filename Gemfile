@@ -25,6 +25,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'koala'
 
+gem 'backbone-on-rails', '~> 1.1.0.0'
+gem 'lodash-rails', '~> 2.2.1'
+
 group :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
