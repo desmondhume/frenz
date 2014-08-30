@@ -12,11 +12,7 @@ Frenz.Views.UserProfile = Backbone.View.extend({
   },
 
   render: function() {
-    _template = "<ul>";
-    for(attr in this.model.attributes) {
-      _template += "<li>"+attr+":"+this.model.get(attr)+"</li>";
-    }
-    _template += "</ul>";
+    var _template = HandlebarsTemplates['users/profile']({user: this.model});
     this.$el.html(_template);
   }
 });
