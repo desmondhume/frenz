@@ -25,6 +25,7 @@ Frenz.Views.Login = Backbone.View.extend({
       localStorage.setItem("frenz_access_token", response.get('user')['access_token']);
       Frenz.session.set('accessToken', localStorage.getItem("frenz_access_token"));
       Frenz.current_user.me();
+      Backbone.history.navigate('/', {trigger: true});
       _this.remove();
     });
   }
