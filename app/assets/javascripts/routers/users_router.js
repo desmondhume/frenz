@@ -5,6 +5,7 @@ Frenz.Routers.Users = Backbone.Router.extend({
   },
 
   profile: function() {
+    Frenz.mainView.clean();
     var userProfileView =
       Frenz.mainView.subviews.userProfileView = 
       new Frenz.Views.UserProfile({model: Frenz.current_user});
