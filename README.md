@@ -10,3 +10,4 @@
     - /login -> /
   - User not logged in
     - /profile -> /login
+- Create api resources presenters
