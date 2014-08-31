@@ -1,3 +1,4 @@
+[![Code Climate](https://codeclimate.com/github/desmondhume/frenz/badges/gpa.svg)](https://codeclimate.com/github/desmondhume/frenz)
 ##Frenz
 ###TODO
 
