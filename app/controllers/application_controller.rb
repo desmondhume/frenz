@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   private
 
     def authenticated
-      access_token = request.headers["HTTP_ACCESS_TOKEN"] || params[:accessToken] || request.headers[:access_token]
+      access_token = request.headers["HTTP_ACCESS_TOKEN"] || params[:accessToken] || params[:access_token] || request.headers[:access_token]
       @user = User.where(access_token: access_token).first
       @user || false
     end
