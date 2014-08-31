@@ -30,6 +30,8 @@ gem 'lodash-rails', '~> 2.2.1'
 
 gem 'handlebars_assets'
 
+gem 'active_model_serializers'
+
 group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
