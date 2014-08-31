@@ -3,11 +3,15 @@ class UsersController < ApplicationController
   before_filter :require_login, only: [:me, :update]
 
   def me
-    respond_with @user, status: 200
+    respond_with @user.attributes, status: 200
   end
 
   def index
-    @users = User.all
+    if authenticated
+      @users = User.where.not(id: @user.id)
+    else
+      @users = User.all
+    end
     respond_with @users, status: 200
   end
 

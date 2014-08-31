@@ -32,6 +32,8 @@ gem 'handlebars_assets'
 
 gem 'active_model_serializers'
 
+gem "twitter-bootstrap-rails"
+
 group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
