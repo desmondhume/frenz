@@ -10,3 +10,5 @@
     - /login -> /
   - User not logged in
     - /profile -> /login
+- Create api resources presenters
+- Pass Rails CSRF token to Backbone 

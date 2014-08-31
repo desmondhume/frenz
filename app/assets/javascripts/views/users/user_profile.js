@@ -6,7 +6,9 @@ Frenz.Views.UserProfile = Backbone.View.extend({
 
   id: "userProfile",
 
-  events: {},
+  events: {
+    'submit #userProfileForm': 'sendForm'
+  },
 
   initialize: function() {
     this.parentView = Frenz.mainView;
@@ -17,5 +19,17 @@ Frenz.Views.UserProfile = Backbone.View.extend({
     var _template = HandlebarsTemplates['users/profile']({user: this.model});
     this.$el.html(_template);
     return this;
+  },
+
+  sendForm: function(e) {
+    e.preventDefault();
+    var user = this.model;
+    this.$el.find('input[name]').each(function() {
+      user.set(this.name, this.value);
+    });
+    $.ajaxSetup({
+      headers: { 'access_token' : Frenz.session.get('accessToken') }
+    });
+    user.save();
   }
 });
