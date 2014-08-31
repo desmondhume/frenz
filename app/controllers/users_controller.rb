@@ -24,13 +24,6 @@ class UsersController < ApplicationController
   end
 
   private
-    def require_login
-      unless authenticated
-        respond_to do |format|
-          format.json { render json: {error: 'You are not logged in'}.to_json, status: 403 }
-        end
-      end
-    end
 
     def user_params
       params.require(:user).permit(:first_name, :last_name)

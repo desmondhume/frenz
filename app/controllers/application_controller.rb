@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :authenticated
+  helper_method :require_login
 
   private
 
@@ -17,4 +18,12 @@ class ApplicationController < ActionController::Base
       @user || false
     end
       alias_method :current_user, :authenticated
+
+    def require_login
+      unless authenticated
+        respond_to do |format|
+          format.json { render json: {error: 'You are not logged in'}.to_json, status: 403 }
+        end
+      end
+    end
 end
