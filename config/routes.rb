@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get 'users/me', to: 'users#me'
     put 'users/me', to: 'users#update'
 
+    get 'invitations', to: 'invitations#index'
   end
   root 'application#index'
   match '*path' => 'application#index', via: [:get]
