@@ -10,6 +10,10 @@ Frenz.Models.User = Backbone.Model.extend({
     this.fetch();
   },
 
+  parse: function(payload) {
+    return payload.user;
+  },
+
   authenticated: function() {
     return !!(Frenz.session.get('accessToken'));
   },
