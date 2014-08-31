@@ -2,7 +2,8 @@ Frenz.Routers.Main = Backbone.Router.extend({
 
   routes: {
     "": "home",
-    "login": "login"
+    "login": "login",
+    "logout": "logout"
   },
 
   initialize: function() {
@@ -19,6 +20,10 @@ Frenz.Routers.Main = Backbone.Router.extend({
 
     loginView.render();
     Frenz.mainView.$el.append(loginView.el);
+  },
+
+  logout: function() {
+    Frenz.session.logout();
   },
 
   home: function() {

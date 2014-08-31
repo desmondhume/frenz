@@ -22,7 +22,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{current_user.attributes.first_name}} {{ current_user.attributes.last_name }} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="/profile" data-route>Your profile</a></li>
-              <li><a href="#">Logout</a></li>
+              <li><a href="/logout" data-route>Logout</a></li>
             </ul>
           </li>
         {{else}}

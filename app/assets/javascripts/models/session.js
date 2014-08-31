@@ -26,7 +26,19 @@ Frenz.Models.Session = Backbone.Model.extend({
   },
 
   logout: function(){
-    FB.logout();
+    var _this = this;
+    $.ajaxSetup({
+      headers: { 'access_token' : Frenz.session.get('accessToken') }
+    });
+    $.ajax({
+      method: 'DELETE',
+      url: _this.urlRoot,
+      success: function() {
+        _this.set('access_token', null);
+        localStorage.removeItem('frenz_access_token');
+        window.location.href = '/';
+      }
+    })
   },
 
   updateLoginStatus: function(){
