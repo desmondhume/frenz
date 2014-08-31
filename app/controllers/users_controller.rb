@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    respond_with users: @users, status: 200
+    respond_with @users, status: 200
   end
 
   def update
