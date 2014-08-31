@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index]
     get 'users/me', to: 'users#me'
-    post 'users/me', to: 'users#update'
+    put 'users/me', to: 'users#update'
   end
   root 'application#index'
   match '*path' => 'application#index', via: [:get]
