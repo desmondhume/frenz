@@ -16,6 +16,13 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    @user.update_attribute('access_token', nil)
+    respond_to do |format|
+      format.json { render json: {message: 'Logged out'}.to_json, status: 204 }
+    end
+  end
+
   private
 
     def set_user
