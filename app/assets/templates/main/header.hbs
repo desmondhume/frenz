@@ -2,7 +2,7 @@
   <li><a href="/" data-route>Home</a></li>
   {{#if authenticated }}
     <li><a href="/profile" data-route>Your profile</a></li>
-    <li>{{current_user.attributes.first_name}}</li>
+    <li>Hi {{current_user.attributes.first_name}} {{ current_user.attributes.last_name }}!</li>
   {{else}}
     <li><a href="/login" data-route>Login</a></li>
   {{/if}}
