@@ -1,7 +1,6 @@
 Frenz.Models.User = Backbone.Model.extend({
 
   urlRoot: Frenz.Config.apiUrl + 'users',
-  _loginStatus: null,
 
   me: function() {
     $.ajaxSetup({
@@ -11,8 +10,8 @@ Frenz.Models.User = Backbone.Model.extend({
     this.fetch();
   },
 
-  isConnected: function() {
-    return this._loginStatus === 'connected';
+  authenticated: function() {
+    return !!(Frenz.session.get('accessToken'));
   },
 
 });

@@ -15,6 +15,11 @@ Frenz.Routers.Main = Backbone.Router.extend({
     Frenz.mainView.$el.append(loginView.el);
   },
 
+  initialize: function() {
+    Frenz.headerView = new Frenz.Views.Header();
+    $('.header').html(Frenz.headerView.render().el);
+  },
+
   home: function() {
     Frenz.mainView.clean();
   },
